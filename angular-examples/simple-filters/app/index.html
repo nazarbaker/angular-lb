@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" ng-app="phonecatApp">
+<head>
+  <meta charset="utf-8">
+  <title>My HTML File</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="js/controllers.js"></script>
+</head>
+<body ng-controller="PhoneListCtrl">
+  <h1>{{ title }}</h1>
+  <input type="text" ng-model="query">
+  <ul>
+    <!-- тут буде фільтруватися по тому що введе користувач в інпуті -->
+    <!-- <li ng-repeat="phone in phones | filter: query"> -->
+    <!-- тут фільтрується і по інпуту і по статутсу (див в контролері) -->
+    <li ng-repeat="phone in phones | filter: {name:query, status:true}">
+      <span>{{ phone.name }}</span>
+      <p>
+        {{ phone.snippet }} <br />
+        Status: {{ phone.status }}
+      </p>
+    </li>
+  </ul>
+  <p>Загальна кількість телефонів: {{ phones.length }}</p>
+  <table>
+    <tr ng-repeat="n in [0,1,2,3,4,5,6,7,8,9]">
+      <td>{{ n + 1 }}</td>
+    </tr>
+  </table>
+  <span>{{ today | date: 'dd/MM/yyyy' }}</span>
+  <br />
+  <!-- max 10 + lowercase -->
+  <span>{{ 'MyVeryLongString' | limitTo:10 | lowercase }}</span>
+  <hr>
+  <ul>
+    <li>1. Currency: {{ 234 | currency }}</li>
+    <li>2. Date: {{ 12312312311 | date:'dd.MM.yyyy' }}</li>
+    <li>3. Number: {{1234.1 | number:3 }}</li><!-- 1234.100  -->
+    <li>4. Json: <pre>{{ {'text':'text', 'text2':'text2'} | json }}</pre></li>
+  </ul>
+</body>
+</html>
